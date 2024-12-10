@@ -1,1 +1,267 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.Thymeleaf.org">
 
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=divice-width,initial-scale=1.0">
+	<title>BCVapiBanc</title>
+</head>
+
+<body>
+	<h1>API BCV</h1>
+	<button type="button" id="btn-solicitud001" style="padding:40px 40px;">btn-solicitud001</button>
+
+	<button type="button" id="btn-bcv" style="padding:40px 40px;">API-BCV</button>
+
+	<script type="text/javascript">
+
+		document.querySelector("#btn-bcv").addEventListener("click", () => {
+
+			const param = {
+				"cedulaPagador": "V27037606",
+				"telefonoPagador": "04127141363",
+				"telefonoDestino": "04127141363",
+				"referencia": "123112313",
+				"fechaPago": "2023-02-12",
+				"importe": "120.00",
+				"bancoOrigen": "0102",
+				"reqCed": "true"
+			}
+
+			const queryParams = new URLSearchParams({
+				apikey: '97F6F54EF1A84F3A24FE19A3B338C77A',
+			});
+
+			const urlx = "https://bdvconciliacionqa.banvenez.com:444/getMovement";
+
+			const resPromese = async () => {
+				try {
+
+					const r = await fetch(urlx, {
+
+						method: "POST",
+						mode: "cors",
+						cahe: "no-cache",
+						headers: {
+							'Content-Type': 'application/json',
+							'X-API-KEY': '96R7T1T5J2134T5YFC2GF15SDFG4BD1Z',
+
+						},
+						body: JSON.stringify(param)
+					});
+
+					if (r.status == 200) {
+						const x = await r.json();
+						x.forEach(s => {
+							console.log(s);
+						});
+					}
+				} catch (e) {console.log(e);}
+			}
+			resPromese();
+
+
+			var apiUrl = 'https://bdvconciliacionqa.banvenez.com:444/getMovement';
+
+			const requestOptions = {
+				method: 'POST',
+				headers: {'Content-Type': 'application/json', 'X-API-KEY': '96R7T1T5J2134T5YFC2GF15SDFG4BD1Z'},
+				body: JSON.stringify({
+
+					"cedulaPagador": "V27037606",
+					"telefonoPagador": "04127141363",
+					"telefonoDestino": "04127141363",
+					"referencia": "123112313",
+					"fechaPago": "2023-02-12",
+					"importe": "120.00",
+					"bancoOrigen": "0102",
+					"reqCed": "true"
+				})
+			};
+
+			fetch(apiUrl, requestOptions)
+				.then(response => response.json())
+				.then(data => {
+					console.log('Respuesta de API:', data);
+				})
+				.catch(error => {
+					console.error('Error al enviar datos al API :', error);
+
+				});
+
+			/* fetch('https://jsonplaceholder.typicode.com/users/1')
+				.then(respuesta => console.log(respuesta))
+				.catch(error => console.log(error));
+
+			fetch('https://jsonplaceholder.typicode.com/users', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					nombre: 'Nathan Sebhastian',
+					correo: 'ns@mail.com'
+				}),
+			}).then(respuesta => respuesta.json())
+				.then(datos => console.log(datos))*/
+
+
+
+			/*function exito() {
+				var datos = JSON.parse(this.param);
+				console.log(datos);
+			}
+			function error(err) {
+				console.log('Solicitud fallida', err);
+			}
+
+			var xhr = new XMLHttpRequest();
+			xhr.onload = exito;
+			xhr.onerror = error;
+			xhr.open('POST', 'hthttps://bdvconciliacionqa.banvenez.com:444/getMovement');
+			xhr.send();*/
+
+		});
+
+		document.querySelector("#btn-solicitud001").addEventListener("click", function btn_solicitud001() {
+
+			const variablesObj = {
+				"co_art": "2012003",
+				"scannerVal2": "2012003",
+				"scannerVal3": "2012003",
+				"Nfact_numSys": "0"
+			}
+
+			const url = '/api/ajaxrest/demo/&co_art=2012003&scannerVal2=2012003&scannerVal3=2012003&Nfact_numSys=0';
+
+			const resultFunc = async () => {
+				try {
+
+					let respuesObj;
+
+					const respues = await fetch(url, {
+						method: 'POST',
+						mode: 'cors',
+						cache: 'no-cache',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(variablesObj, undefined, 4)
+					});
+
+					if (respues.status == 200) {
+						const data = await respues.json();
+
+						data.forEach(respuesObj => {
+
+							console.log(respuesObj);
+						});
+
+						//console.log(respues.json());
+					}
+				} catch (e) {console.log(e)}
+			}
+
+			resultFunc();
+			/*	fetch(url)
+					.then(response => response.json())
+					.then(repos => {
+						const reposList = repos.map(repo => repo.name);
+						console.log(reposList);
+					})
+					.catch(err => console.log(err))*/
+
+
+			// funcion para cuando la llamada es exitosa
+			function exito() {
+				var datos = JSON.parse(this.responseText);
+				console.log(datos);
+			}
+
+			
+			function error(err) {
+				console.log('Solicitud fallida', err); 
+			}
+
+			var xhr = new XMLHttpRequest(); 
+			xhr.onload = exito; 
+			xhr.onerror = error;  
+			xhr.open('GET', 'https://api.github.com/users/manishmshiva'); 
+			xhr.send(); 
+
+			console.log("btn-solicitud001");
+		});
+
+
+		document.addEventListener('DOMContentLoaded', () => {
+
+			const myHeaders = new Headers();
+			myHeaders.append("Content-Type", "application/json");
+			myHeaders.append("X-API-KEY", "96R7T1T5J2134T5YFC2GF15SDFG4BD1Z ");
+			myHeaders.append('access-control-allow-credentials', 'true');
+			myHeaders.append('access-control-allow-origin', '200.11.243.176');
+			myHeaders.append('access-control-expose-headers', 'pm-e, pm-h0, pm-h1, pm-h2, pm-h3, pm-o0, pm-o1, pm-o2, pm-o3');
+			myHeaders.append('cf-cache-status', 'DYNAMIC');
+			myHeaders.append('pm-h0', 'Content-Type=application/json, Content-Length=162, Connection=keep-alive, X-Kong-Upstream-Latency=1, X-Kong-Proxy-Latency=1, Via=kong/3.0.0.0-enterprise-edition');
+			myHeaders.append('pm-o0', 'statusCode=200, statusMessage=OK, httpVersion=1.1, timings=wait:0.077|dns:0.544|tcp:68.268|tls:450.740|request:0.099|firstByte:69.976, session={"id":"c0f5df1d-78fa-46e9-ae86-a1a8a120e81f"%2C"reused":false%2C"data":{"addresses":{"local":{"address":"172.17.0.2"%2C"family":"IPv4"%2C"port":54570}%2C"remote":{"address":"200.11.243.176"%2C"family":"IPv4"%2C"port":444}}%2C"tls":{"reused":false%2C"authorized":true%2C"authorizationError":null%2C"cipher":{"name":"ECDHE-RSA-AES128-GCM-SHA256"%2C"standardName":"TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"%2C"version":"TLSv1.2"}%2C"protocol":"TLSv1.2"%2C"ephemeralKeyInfo":{"type":"ECDH"%2C"name":"secp384r1"%2C"size":384}%2C"peerCertificate":{"subject":{"commonName":"bdvconciliacionqa.banvenez.com"%2C"alternativeNames":"DNS:bdvconciliacionqa.banvenez.com%2C DNS:www.bdvconciliacionqa.banvenez.com"}%2C"issuer":{"country":"GB"%2C"stateOrProvince":"Greater Manchester"%2C"locality":"Salford"%2C"organization":"Sectigo Limited"%2C"commonName":"Sectigo RSA Domain Validation Secure Server CA"}%2C"validFrom":"May 2 00:00:00 2024 GMT"%2C"validTo":"May 2 23:59:59 2025 GMT"%2C"fingerprint":"64:58:D1:74:2C:9C:11:AF:0F:31:A2:09:15:F5:95:13:8E:82:BC:D8"%2C"serialNumber":"20D73690A0406483944D53A1B76AC648"}}}}');  
+			myHeaders.append('strict-transport-security' , 'origin');
+			
+			
+
+			const raw = JSON.stringify({
+				"cedulaPagador": "V27037606",
+				"telefonoPagador": "04127141363",
+				"telefonoDestino": "04127141363",
+				"referencia": "123112313",
+				"fechaPago": "2023-02-12",
+				"importe": "120.00",
+				"bancoOrigen": "0102",
+				"reqCed": "true"
+			});
+
+			const requestOptions = {
+				method: "POST",
+				headers: myHeaders,
+				body: raw,
+				redirect: "follow"
+			};
+
+			fetch("https://bdvconciliacionqa.banvenez.com:444/getMovement", requestOptions)
+				.then((response) => response.text())
+				.then((result) => console.log(result))
+				.catch((error) => console.error(error));
+		});
+
+
+		/*
+			// WARNING: For POST requests, body is set to null by browsers. XHR
+var data = JSON.stringify({
+  "cedulaPagador": "V27037606",
+  "telefonoPagador": "04127141363",
+  "telefonoDestino": "04127141363",
+  "referencia": "123112313",
+  "fechaPago": "2023-02-12",
+  "importe": "120.00",
+  "bancoOrigen": "0102",
+  "reqCed": "true"
+});
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function() {
+  if(this.readyState === 4) {
+	console.log(this.responseText);
+  }
+});
+
+xhr.open("POST", "https://bdvconciliacionqa.banvenez.com:444/getMovement");
+xhr.setRequestHeader("Content-Type", "application/json");
+xhr.setRequestHeader("X-API-KEY", "96R7T1T5J2134T5YFC2GF15SDFG4BD1Z ");
+
+xhr.send(data);
+		*/
+	</script>
+</body>
+
+</html>
